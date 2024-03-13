@@ -6,9 +6,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-
 
 
 @Configuration
@@ -28,17 +25,13 @@ public class UserRegistrationSecurityConfig {
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
+                .requestMatchers("/review/create/**")
+                .permitAll()
+                .and()
+                .authorizeHttpRequests()
                 .requestMatchers("/users/**")
                 .hasAnyAuthority("USER", "ADMIN")
-                .and().formLogin().successHandler(successHandler())
-                .and().build();
+                .and().formLogin().and().build();
     }
 
-    @Bean
-    public AuthenticationSuccessHandler successHandler() {
-        SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
-        handler.setDefaultTargetUrl("/users");
-        handler.setAlwaysUseDefaultTargetUrl(true);
-        return handler;
-    }
 }

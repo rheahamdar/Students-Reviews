@@ -8,8 +8,6 @@ import com.dailycodework.sbemailverificationdemo.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,23 +21,10 @@ public class RegistrationController {
     private final VerificationTokenRepository tokenRepository;
 
     @PostMapping
-    public ResponseEntity<String> registerUser(@RequestBody RegistrationRequest registrationRequest, final HttpServletRequest request){
-        String email = registrationRequest.email();
-
-        // Extract username from email
-        String emailUsername = email.substring(0, email.indexOf('@'));
-        
-        // Check if the provided username matches the username from the email
-        if (!registrationRequest.userName().equals(emailUsername)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The provided username does not match the username from the email.");
-        }
-
-        if (email != null && !email.endsWith("@mail.aub.edu")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email addresses not ending with '@mail.aub.edu' are not allowed for registration.");
-        }
+    public String registerUser(@RequestBody RegistrationRequest registrationRequest, final HttpServletRequest request){
         User user = userService.registerUser(registrationRequest);
         publisher.publishEvent(new RegistrationCompleteEvent(user, applicationUrl(request)));
-        return ResponseEntity.ok("Success! Please check your email to complete your registration.");
+        return "Success!  Please, check your email for to complete your registration";
     }
 
     @GetMapping("/verifyEmail")

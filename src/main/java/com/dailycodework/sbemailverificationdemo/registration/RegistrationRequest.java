@@ -1,6 +1,5 @@
 package com.dailycodework.sbemailverificationdemo.registration;
 
-import org.hibernate.annotations.NaturalId;
 
 
 public record RegistrationRequest(

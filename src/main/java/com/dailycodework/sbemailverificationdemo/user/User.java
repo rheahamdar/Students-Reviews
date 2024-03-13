@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
+
 @Getter
 @Setter
 @Entity
@@ -20,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
-    @NaturalId(mutable = false)// no 2 users have same id
+    @NaturalId(mutable = true)
     private String email;
     private String password;
     private String role;
