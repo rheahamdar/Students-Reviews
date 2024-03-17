@@ -11,11 +11,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class UserRegistrationSecurityConfig {
-
+    
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+    
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.cors()
@@ -25,7 +26,7 @@ public class UserRegistrationSecurityConfig {
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/review/create/**")
+                .requestMatchers("/review/**")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()

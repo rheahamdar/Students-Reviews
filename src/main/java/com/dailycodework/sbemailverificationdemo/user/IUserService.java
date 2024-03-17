@@ -1,7 +1,6 @@
 package com.dailycodework.sbemailverificationdemo.user;
 
 import com.dailycodework.sbemailverificationdemo.registration.RegistrationRequest;
-import com.dailycodework.sbemailverificationdemo.registration.token.VerificationToken;
 
 import java.util.List;
 import java.util.Optional;

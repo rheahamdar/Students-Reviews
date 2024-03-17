@@ -1,7 +1,5 @@
 package com.dailycodework.sbemailverificationdemo.review;
 
-import com.dailycodework.university.University;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +24,17 @@ public class Review {
     private int courseRating;
     @Column(name = "uni_name")
     private String uniName;
+    @Column(name="user_name")
+    private String userName;
 
+  
+   
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
     public String getUniName() {
         return uniName;
     }
@@ -57,10 +65,7 @@ public class Review {
     public void setCourseRating(int courseRating) {
         this.courseRating = courseRating;
     }
-    public void setUniversity(University selectedUniversity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setUniversity'");
-    }
+   
 
 
    
